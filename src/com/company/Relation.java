@@ -2,7 +2,6 @@ package com.company;
 
 import javafx.util.Pair;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -29,7 +28,7 @@ public class Relation<T extends Comparable<T>> {
   }
 
   public Relation<T> union(Relation<T> relation) {
-    Set<Pair<T, T>> newElements = new HashSet<>();
+    Set<Pair<T, T>> newElements = new TreeSet<>(new PairComparator<>());
     newElements.addAll(elements);
     newElements.addAll(relation.getElements());
     return new Relation<>(newElements);
