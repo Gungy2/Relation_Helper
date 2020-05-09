@@ -11,10 +11,10 @@ public class Main {
     int n = in.nextInt();
     for (int i = 1; i <= n; i++) {
       String suffix;
-      if (i >= 10 && i <= 20) {
+      if (i % 100 >= 10 && i % 100 <= 20) {
         suffix = "th";
       } else {
-        switch (i % 20) {
+        switch (i % 10) {
           case 1:
             suffix = "st";
             break;
