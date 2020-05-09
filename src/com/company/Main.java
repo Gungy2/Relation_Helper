@@ -31,7 +31,16 @@ public class Main {
       System.out.print("Introduce the " + i + suffix + " pair: ");
       relation.addElements(in.nextInt(), in.nextInt());
     }
-    System.out.println("Your relation: " + relation);
+    System.out.println("Your relation: " + relation + '\n');
+
+    String isReflexive = relation.isReflexive() ? " " : " NOT ";
+    System.out.println("The relation is" + isReflexive + "reflexive.");
+    String isSymmetric = relation.isSymmetric() ? " " : " NOT ";
+    System.out.println("The relation is" + isSymmetric + "symmetric.");
+    String isTransitive = relation.isTransitive() ? " " : " NOT ";
+    System.out.println("The relation is" + isTransitive + "transitive.\n");
+
+    System.out.println("Inverse: " + relation.inverse());
     System.out.println("Transitive Closure: " + relation.computeClosure());
   }
 }

@@ -3,12 +3,13 @@ package com.company;
 import javafx.util.Pair;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Relation<T extends Comparable<T>> {
 
-  private Set<Pair<T, T>> elements;
+  private final Set<Pair<T, T>> elements;
 
   public Relation() {
     elements = new TreeSet<>(new PairComparator<>());
@@ -56,6 +57,49 @@ public class Relation<T extends Comparable<T>> {
     return closure;
   }
 
+  public Relation<T> inverse() {
+    Relation<T> relation = new Relation<>();
+    for (Pair<T, T> pair : elements) {
+      relation.addElements(pair.getValue(), pair.getKey());
+    }
+    return relation;
+  }
+
+  public boolean isSymmetric() {
+    return equals(inverse());
+  }
+
+  public boolean isTransitive() {
+    return contains(compose(this));
+  }
+
+  public boolean isReflexive() {
+    for (T element : makeSet()) {
+      if (!elements.contains(new Pair<>(element, element))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public Set<T> makeSet() {
+    Set<T> set = new TreeSet<>();
+    for (Pair<T, T> pair : elements) {
+      set.add(pair.getKey());
+      set.add(pair.getValue());
+    }
+    return set;
+  }
+
+  private boolean contains(Relation<T> relation) {
+    for (Pair<T, T> pair : relation.getElements()) {
+      if (!elements.contains(pair)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -72,5 +116,17 @@ public class Relation<T extends Comparable<T>> {
     }
     sb.append('}');
     return sb.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof Relation)) return false;
+    Relation<?> relation = (Relation<?>) o;
+    return elements.equals(relation.getElements());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(elements);
   }
 }
