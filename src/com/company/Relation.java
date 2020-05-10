@@ -46,9 +46,17 @@ public class Relation<T extends Comparable<T>> {
     return newRelation;
   }
 
+  public Relation<T> power(int n) {
+    Relation<T> prev = new Relation<>(elements);
+    for (int i = 1; i < n; i++) {
+      prev = compose(prev);
+    }
+    return prev;
+  }
+
   public Relation<T> computeClosure() {
     Relation<T> closure = new Relation<>(elements);
-    Relation<T> prev = this;
+    Relation<T> prev = new Relation<>(elements);
     for (int i = 0; i < elements.size() - 1; i++) {
       prev = compose(prev);
       closure = closure.union(prev);

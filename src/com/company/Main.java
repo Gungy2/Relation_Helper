@@ -42,5 +42,11 @@ public class Main {
 
     System.out.println("Inverse: " + relation.inverse());
     System.out.println("Transitive Closure: " + relation.computeClosure());
+
+    System.out.print("\nIntroduce the power: ");
+    int pow = in.nextInt();
+    System.out.println("Relation to the power of " + pow + " : " + relation.power(pow));
+
+    in.close();
   }
 }
