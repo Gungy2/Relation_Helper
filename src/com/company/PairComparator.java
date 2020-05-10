@@ -1,6 +1,5 @@
 package com.company;
 
-import javafx.util.Pair;
 import java.util.Comparator;
 
 public class PairComparator<T extends Comparable<T>> implements Comparator<Pair<T, T>> {

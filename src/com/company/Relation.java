@@ -1,7 +1,5 @@
 package com.company;
 
-import javafx.util.Pair;
-
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
